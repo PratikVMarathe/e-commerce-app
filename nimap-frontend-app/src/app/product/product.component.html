@@ -1,0 +1,25 @@
+<div>
+    <h3>Add New Product</h3>
+    <form [formGroup]="productForm" (ngSubmit)="addProduct()">
+      <label for="productName">Product Name:</label>
+      <input type="text" id="productName" formControlName="name">
+      <label for="productCategory">Category:</label>
+      <select id="productCategory" formControlName="categoryId">
+        <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+      </select>
+      <button type="submit" [disabled]="productForm.invalid">Add Product</button>
+    </form>
+  </div>
+<div *ngIf="!isEditing; else editMode">
+    <h2>{{ product.name }}</h2>
+    <p>Product ID: {{ product.id }}</p>
+    <button (click)="editProduct()">Edit</button>
+    <button (click)="deleteProduct(product.id)">Delete</button>
+  </div>
+  
+  <ng-template #editMode>
+    <input type="text" [(ngModel)]="editedProductName" placeholder="Enter new product name">
+    <button (click)="saveProductChanges()">Save</button>
+    <button (click)="cancelEdit()">Cancel</button>
+  </ng-template>
+  
