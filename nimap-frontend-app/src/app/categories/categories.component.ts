@@ -25,15 +25,15 @@ export class CategoriesComponent implements OnInit {
   addCategory(): void {
     if (this.newCategoryName.trim()) {
       this.categoryService.addCategory({ name: this.newCategoryName }).subscribe(() => {
-        this.newCategoryName = ''; // Clear input field after adding category
-        this.getCategories(); // Refresh category list
+        this.newCategoryName = ''; 
+        this.getCategories(); 
       });
     }
   }
 
   deleteCategory(categoryId: number): void {
     this.categoryService.deleteCategory(categoryId).subscribe(() => {
-      this.getCategories(); // Refresh category list after deletion
+      this.getCategories(); 
     });
   }
 }
