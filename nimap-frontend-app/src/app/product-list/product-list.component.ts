@@ -21,30 +21,30 @@ export class ProductListComponent implements OnInit {
     this.productService.getProducts().subscribe(products => {
       this.products = products.map(product => ({
         ...product,
-        categoryName: product.category.name // Assuming category information is nested in product response
+        categoryName: product.category.name 
       }));
     });
   }
 
   editProduct(product: any): void {
-    this.editedProduct = { ...product }; // Create a copy of the product to edit
+    this.editedProduct = { ...product }; 
     this.isEditing = true;
   }
 
   saveProductChanges(): void {
     this.productService.updateProduct(this.editedProduct.id, this.editedProduct).subscribe(() => {
-      this.getProducts(); // Refresh product list after saving changes
-      this.isEditing = false; // Exit edit mode
+      this.getProducts(); 
+      this.isEditing = false; 
     });
   }
 
   cancelEdit(): void {
-    this.isEditing = false; // Exit edit mode without saving changes
+    this.isEditing = false; 
   }
 
   deleteProduct(productId: number): void {
     this.productService.deleteProduct(productId).subscribe(() => {
-      this.getProducts(); // Refresh product list after deletion
+      this.getProducts(); 
     });
   }
 }
