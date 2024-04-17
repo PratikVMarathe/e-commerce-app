@@ -10,7 +10,7 @@ import { CategoryService } from '../category.service';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent {
-  @Input() product: any; // Input property to receive product data from parent component
+  @Input() product: any; 
   productForm: FormGroup;
   categories: any[] = [];
   isEditing = false;
@@ -37,37 +37,36 @@ export class ProductComponent {
   addProduct(): void {
     if (this.productForm.valid) {
       this.productService.addProduct(this.productForm.value).subscribe(() => {
-        // Reset form after successful addition
+       
         this.productForm.reset();
-        // Optionally, you can notify the user or update the product list
+        
       });
     }
   }
 
   editProduct(): void {
     this.isEditing = true;
-    this.editedProductName = this.product.name; // Initialize editedProductName with current product name
+    this.editedProductName = this.product.name; 
   }
 
   saveProductChanges(): void {
     if (this.editedProductName.trim() && this.editedProductName !== this.product.name) {
       const updatedProductData = { name: this.editedProductName };
       this.productService.updateProduct(this.product.id, updatedProductData).subscribe(() => {
-        this.product.name = this.editedProductName; // Update product name in UI
-        this.isEditing = false; // Exit edit mode
+        this.product.name = this.editedProductName; 
+        this.isEditing = false; 
       });
     } else {
-      this.isEditing = false; // Exit edit mode without saving if no changes or empty input
+      this.isEditing = false; 
     }
   }
 
   cancelEdit(): void {
-    this.isEditing = false; // Exit edit mode without saving
+    this.isEditing = false; 
   }
 
   deleteProduct(productId: number): void {
     this.productService.deleteProduct(productId).subscribe(() => {
-      // Handle success or refresh product list
     });
   }
 }
